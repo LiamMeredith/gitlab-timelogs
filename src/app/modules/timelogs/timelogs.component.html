@@ -1,0 +1,118 @@
+<div class="h-100 d-flex flex-row">
+  <app-side-menu></app-side-menu>
+  <div
+    class="timelogs-container d-flex flex-row h-100 flex-grow-1"
+    [class.w-100]="timelogsLoading"
+  >
+    <div
+      class="navigation-timelogs h-100 d-flex flex-column"
+      [class.w-100]="timelogsLoading"
+    >
+      <div
+        class="timelogs d-flex flex-column flex-grow-1 m-5 justify-content-center"
+        [class.h-100]="timelogsLoading"
+      >
+        <!-- Timelog week -->
+        <ng-container *ngIf="!timelogsLoading">
+          <div *ngFor="let day of week; let index = index" class="mb-3">
+            <ng-container
+              [ngTemplateOutlet]="dayContainer"
+              [ngTemplateOutletContext]="{
+                day: weekTimeLogs[day],
+                dayDisplay: day,
+                index: index
+              }"
+            ></ng-container>
+          </div>
+        </ng-container>
+        <!-- End timelog week -->
+
+        <!-- Timelogs loader -->
+        <div
+          *ngIf="timelogsLoading"
+          class="d-flex justify-content-center text-primary m-auto"
+        >
+          <div class="loader">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+            <div class="bar4"></div>
+            <div class="bar5"></div>
+            <div class="bar6"></div>
+          </div>
+        </div>
+        <!-- End timelogs loader -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Day container: includes day header and timelogs -->
+<ng-template
+  #dayContainer
+  let-day="day"
+  let-index="index"
+  let-dayDisplay="dayDisplay"
+>
+  <ng-container *ngIf="day">
+    <div class="d-flex flex-row">
+      <div
+        class="day-card border card border-left-primary shadow h-100 py-2 px-3 my-auto"
+      >
+        <div>
+          <b>{{ day.dayOfTheWeek }}</b>
+        </div>
+        <div>{{ dayDisplay }}</div>
+        <div class="progress rounded-0 border-dark border-right border-left">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [class.bg-info]="day?.totalSecondsPercentageDay < 100"
+            [class.bg-success]="day?.totalSecondsPercentageDay === 100"
+            [class.bg-warning]="day?.totalSecondsPercentageDay > 100"
+            [style.width]="day?.totalSecondsPercentageDay + '%'"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+
+        <div class="mt-auto">{{ day.totalSecondsDisplay }}</div>
+      </div>
+      <!-- Timelogs of a day -->
+      <ng-container
+        *ngFor="let timelog of day.timelogs"
+        [ngTemplateOutlet]="timelogContainer"
+        [ngTemplateOutletContext]="{ $implicit: timelog }"
+      ></ng-container>
+      <!-- End timelogs of a day -->
+    </div>
+  </ng-container>
+</ng-template>
+<!-- End day container -->
+
+<!-- Timelogs container with timelogs information and progress bar -->
+<ng-template #timelogContainer let-timelog>
+  <div
+    class="d-flex flex-column timelog-card border card shadow h-100 py-2 px-3 my-auto ml-3"
+  >
+    <div class="d-flex flex-row timelog-title border-bottom pb-1">
+      <i
+        *ngIf="timelog.type === TimelogType.MergeRequest"
+        class="fa-solid fa-code-merge text-secondary"
+      ></i>
+      <i
+        *ngIf="timelog.type === TimelogType.Feature"
+        class="fa-solid fa-code text-secondary"
+      ></i>
+      <div class="mx-2 flex-grow-1 text-center text-truncate fw-bold">
+        {{ timelog.title }}
+      </div>
+      <a [href]="timelog.webUrl" target="_blank">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+    </div>
+
+    <div class="mx-2 mt-auto">{{ timelog.timeSpentDisplay }}</div>
+  </div>
+</ng-template>
+<!-- End timelogs container -->

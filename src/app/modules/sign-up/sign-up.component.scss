@@ -1,0 +1,12 @@
+.sign-up-container {
+  width: 500px;
+
+  textarea {
+    margin: 0 5px;
+  }
+}
+
+:host {
+  display: block;
+  height: 100%;
+}

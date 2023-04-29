@@ -1,0 +1,79 @@
+<div class="d-flex flex-column h-100 border-right border-muted bg-light shadow">
+  <app-nav-bar></app-nav-bar>
+
+  <!-- Main side menu -->
+  <div class="side-menu-content mt-5 flex-grow-1 d-flex flex-column">
+    <div class="d-flex flex-row mt-2">
+      <button
+        class="btn btn-link ngb-dp-arrow-btn btn-lg"
+        (click)="timelogStore.selectPreviousWeek()"
+      >
+        <i class="fa-solid fa-angle-left"></i>
+      </button>
+      <span class="flex-grow-1 text-center m-auto">Week navigation</span>
+      <button
+        class="btn btn-link ngb-dp-arrow-btn btn-lg"
+        (click)="timelogStore.selectNextWeek()"
+      >
+        <i class="fa-solid fa-angle-right"></i>
+      </button>
+    </div>
+
+    <!-- Calendar picker -->
+    <div class="mt-5">
+      <ngb-datepicker
+        *ngIf="selectedDays"
+        #datePicker="ngbDatepicker"
+        (dateSelect)="selectDate($event)"
+        [dayTemplate]="t"
+      ></ngb-datepicker>
+    </div>
+    <!-- End calendar picker -->
+
+    <!-- Sum of all hours of the week -->
+    <div class="p-2 mt-5">
+      <div>Total week advancement</div>
+      <div class="progress rounded-0 border-dark border-right border-left mt-2">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          [class.bg-info]="totalSecondsPercentageWeek < 100"
+          [class.bg-success]="totalSecondsPercentageWeek === 100"
+          [class.bg-warning]="totalSecondsPercentageWeek > 100"
+          [style.width]="totalSecondsPercentageWeek + '%'"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+
+      <div class="mt-auto">{{ totalWeekTimeDisplay }}</div>
+    </div>
+    <!-- End sum of all hours of the week -->
+  </div>
+  <!-- End main side menu -->
+
+  <!-- Main footer -->
+  <div class="footer bg-dark text-light text-center d-flex flex-column">
+    <div class="flex-grow-1"></div>
+    <div class="mb-4">
+      <small
+        ><i class="fa-sharp fa-solid fa-copyright mr-2"></i>All rights
+        reserved.</small
+      >
+    </div>
+  </div>
+  <!-- End main footer -->
+</div>
+
+<!-- Template for day in the calendar picker -->
+<ng-template #t let-date let-focused="focused">
+  <div
+    class="custom-day h-100 text-center"
+    [class.selectedDay]="
+      selectedDays['' + date.day + date.month + date.year] === true
+    "
+  >
+    {{ date.day }}
+  </div>
+</ng-template>
+<!-- End template for day in the calendar picker -->

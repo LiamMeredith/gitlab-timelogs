@@ -1,0 +1,138 @@
+/* You can add global styles to this file, and also import other style files */
+$primary: #2a56db;
+$info: #17a2b8;
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+html {
+  overflow: hidden;
+}
+
+.ngb-dp-week:hover {
+  .custom-day {
+    background: var(--bs-gray-300);
+  }
+  .ngb-dp-day:first-child {
+    .custom-day {
+      border-top-left-radius: 13px;
+      border-bottom-left-radius: 13px;
+    }
+  }
+
+  .ngb-dp-day:last-child {
+    .custom-day {
+      border-top-right-radius: 13px;
+      border-bottom-right-radius: 13px;
+    }
+  }
+}
+
+.ngb-dp-months {
+  background-color: white;
+}
+
+.ngb-dp-day {
+  .btn-light:hover {
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .btn-light:active {
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
+.ngb-dp-day {
+  .selectedDay {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    background-color: var(--bs-primary) !important;
+    color: var(--bs-white);
+  }
+
+
+}
+
+.ngb-dp-day:first-child {
+  .selectedDay {
+    border-left: 1px solid;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
+  }
+}
+
+.ngb-dp-day:last-child {
+  .selectedDay {
+    border-right: 1px solid;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+  }
+}
+
+.custom-day {
+  line-height: 30px;
+}
+
+
+
+// Loader
+.loader {
+  margin: 0 auto;
+  width: 60px;
+  height: 50px;
+
+  > div {
+    height: 100%;
+    width: 8px;
+    display: inline-block;
+    float: left;
+    margin-left: 2px;
+    -webkit-animation: delay 0.8s infinite ease-in-out;
+    animation: delay 0.8s infinite ease-in-out;
+  }
+
+  .bar1{
+    background-color: $blue-300 ;
+  }
+  .bar2{
+    background-color: $blue-400;
+    -webkit-animation-delay: -0.7s;
+    animation-delay: -0.7s;
+  }
+  .bar3{
+    background-color: $blue-500;
+    -webkit-animation-delay: -0.6s;
+    animation-delay: -0.6s;
+  }
+  .bar4{
+    background-color: $blue-600;
+    -webkit-animation-delay: -0.5s;
+    animation-delay: -0.5s;
+  }
+  .bar5{
+    background-color: $blue-700;
+    -webkit-animation-delay: -0.4s;
+    animation-delay: -0.4s;
+  }
+  .bar6{
+    background-color: $blue-800;
+    -webkit-animation-delay: -0.3s;
+    animation-delay: -0.3s;
+  }
+}
+
+
+@-webkit-keyframes delay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.05) }
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes delay {
+  0%, 40%, 100% {
+    transform: scaleY(0.05);
+    -webkit-transform: scaleY(0.05);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}

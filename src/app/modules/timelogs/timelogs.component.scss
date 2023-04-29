@@ -1,0 +1,32 @@
+.day-card {
+  width: 250px;
+  height: 120px !important;
+}
+
+.timelog-card {
+  height: 120px !important;
+  min-width: 250px;
+  max-width: 350px;
+  .timelog-title {
+    svg {
+      margin: auto;
+    }
+  }
+}
+
+.timelogs-container {
+  width: fit-content;
+  overflow: auto;
+
+  .timelogs-full-week {
+    height: 840px;
+  }
+
+  .navigation-timelogs {
+    margin: auto 0;
+  }
+}
+
+.progress {
+  border-width: 3px !important;
+}

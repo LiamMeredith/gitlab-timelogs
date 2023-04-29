@@ -1,0 +1,13 @@
+<div class="d-flex flex-column h-100">
+  <div class="flex-grow-1"></div>
+  <div class="d-flex flex-column justify-content-between sign-up-container m-auto mb-5 pb-5">
+    <h3>Log in</h3>
+    <div class="mb-3">To use the API, it is required to introduce a gitlab token with the minimum rights</div>
+    <textarea [(ngModel)]="cookieForm" rows="4" cols="50"></textarea>
+    <div class="mb-2">Token creation guide in the official gitlab page <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html">here</a></div>
+    <button type="button" class="btn btn-primary mt-3 mb-5" (click)="saveCookie()">
+      save
+    </button>
+  </div>
+  <div class="flex-grow-1"></div>
+</div>

@@ -1,0 +1,84 @@
+<div class="main-nav-bar bg-primary d-flex flex-column">
+  <div class="flex-grow-1">
+    <!-- Toolbar with floating menu -->
+    <div class="tool-bar text-right">
+      <div ngbDropdown class="d-inline-block">
+        <!-- Toggle menu button -->
+        <button
+          type="button"
+          class="btn btn-outline-primary border-0 shadow-none bg-transparent"
+          id="profileMenu"
+          ngbDropdownToggle
+        >
+          <i class="fa-solid fa-bars text-light"></i>
+        </button>
+        <!-- End toggle menu button -->
+
+        <div ngbDropdownMenu aria-labelledby="profileMenu">
+          <!-- Toggle weekend checkbox -->
+          <div class="form-check">
+            <label class="form-check-label" for="toggleWeekendCheckBox">
+              Show weekends
+            </label>
+            <input
+              id="toggleWeekendCheckBox"
+              class="align-middle ml-2"
+              type="checkbox"
+              [checked]="config.weekendsIncluded"
+              (change)="toggleWeekend($event.target.checked)"
+            />
+          </div>
+          <!-- End toggle weekend checkbox -->
+
+          <!-- Specify number of daily hours -->
+          <div class="form-check d-flex flex-row mt-2">
+            <label
+              class="form-check-label text-nowrap"
+              for="dailyHoursCheckBox"
+            >
+              Daily hours
+            </label>
+            <input
+              id="dailyHoursCheckBox"
+              class="align-middle mx-2 form-control"
+              type="number"
+              [value]="config.dailyHours"
+              (input)="changeDailyHours($event.target.value)"
+            />
+          </div>
+          <!-- End specify number of daily hours -->
+
+          <!-- Specify number of weekly hours -->
+          <div class="form-check d-flex flex-row mt-2">
+            <label
+              class="form-check-label text-nowrap"
+              for="weeklyHoursCheckBox"
+            >
+              Weekly hours
+            </label>
+            <input
+              id="weeklyHoursCheckBox"
+              class="align-middle mx-2 form-control"
+              type="number"
+              [value]="config.weeklyHours"
+              (input)="changeWeeklyHours($event.target.value)"
+            />
+          </div>
+          <!-- End specify number of weekly hours -->
+        </div>
+      </div>
+    </div>
+    <!-- End toolbar with floating menu -->
+
+    <!-- Title and sub title -->
+    <h5 class="text-light px-2">Welcome back!</h5>
+    <h6 class="text-light px-2">{{ authService.getDisplayUsername() }}</h6>
+    <!-- Title and sub title -->
+  </div>
+
+  <!-- Profile pic -->
+  <div class="profile-pic">
+    <img [src]="authService.getAvatarUrl()" class="rounded-circle" />
+  </div>
+  <!-- End profile pic -->
+</div>
